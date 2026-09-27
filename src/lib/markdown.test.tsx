@@ -67,4 +67,22 @@ describe("renderMarkdown (XSS safety)", () => {
     expect(link).toBeDefined();
     expect((link?.props as { href: string }).href).toBe("https://github.com/yalaahamdy");
   });
+
+  it("renders numbered/ordered lists without hanging or crashing", () => {
+    const source = "1. First feature\n2. Second feature\n3. Third feature";
+    const nodes = renderMarkdown(source);
+    const html = staticMarkup(nodes);
+    expect(html).toContain("<ol>");
+    expect(html).toContain("<li>First feature</li>");
+    expect(html).toContain("<li>Second feature</li>");
+  });
+
+  it("handles malformed list and paragraph lines safely", () => {
+    const source = "1. Lone item\nJust a paragraph\n2. Another item\n- Bullet";
+    const nodes = renderMarkdown(source);
+    const html = staticMarkup(nodes);
+    expect(html).toContain("<ol>");
+    expect(html).toContain("<ul>");
+    expect(html).toContain("<p>Just a paragraph</p>");
+  });
 });

@@ -83,16 +83,18 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
   });
 }
 
-function isListItem(line: string): { indent: number; content: string; task: "done" | "todo" | null } | null {
-  const match = /^(\s*)[-*+]\s+(.*)$/.exec(line);
+function isListItem(line: string): { indent: number; content: string; task: "done" | "todo" | null; ordered: boolean } | null {
+  const match = /^(\s*)(?:([-*+])|(\d+[.)]))\s+(.*)$/.exec(line);
   if (!match) return null;
-  const [, indent, rest] = match as unknown as [string, string, string];
+  const indent = (match[1] ?? "").length;
+  const ordered = Boolean(match[3]);
+  const rest = match[4] ?? "";
   const taskMatch = /^\[( |x|X)\]\s+(.*)$/.exec(rest);
   if (taskMatch) {
     const [, mark, content] = taskMatch as unknown as [string, string, string];
-    return { indent: indent.length, content, task: mark.toLowerCase() === "x" ? "done" : "todo" };
+    return { indent, content, task: mark.toLowerCase() === "x" ? "done" : "todo", ordered };
   }
-  return { indent: indent.length, content: rest, task: null };
+  return { indent, content: rest, task: null, ordered };
 }
 
 interface TableRows {
@@ -213,15 +215,15 @@ export function renderMarkdown(source: string): ReactNode[] {
       continue;
     }
 
-    // Lists (flat with limited nesting by indentation)
+    // Lists (bullet and numbered)
     const listItem = isListItem(line);
     if (listItem) {
-      const ordered = /^\s*\d+[.)]\s+/.test(line);
+      const ordered = listItem.ordered;
       const items: { content: string; task: "done" | "todo" | null }[] = [];
       while (index < lines.length) {
         const current = lines[index] ?? "";
         const parsed = isListItem(current);
-        if (!parsed || ordered !== /^\s*\d+[.)]\s+/.test(current)) break;
+        if (!parsed || parsed.ordered !== ordered) break;
         items.push({ content: parsed.content, task: parsed.task });
         index += 1;
       }
@@ -242,6 +244,11 @@ export function renderMarkdown(source: string): ReactNode[] {
     // Paragraph (soft line breaks preserved, as GitHub renders release notes)
     const buffer: string[] = [];
     while (index < lines.length && (lines[index] ?? "").trim() && !/^(#{1,6})\s|^\s*>|^\s*[-*+]\s|^\s*\d+[.)]\s|^\s*```|^\s*\||^\s*([-*_])\s*(\1\s*){2,}$/.test(lines[index] ?? "")) {
+      buffer.push((lines[index] ?? "").trim());
+      index += 1;
+    }
+    // Hard safeguard against infinite loops: if buffer is empty, consume this line
+    if (buffer.length === 0) {
       buffer.push((lines[index] ?? "").trim());
       index += 1;
     }

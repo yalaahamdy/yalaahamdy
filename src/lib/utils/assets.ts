@@ -1,5 +1,6 @@
 import type { AppEntry, AssetOverride } from "../config";
 import type { GhAsset, GhRelease } from "../services/github";
+import { repairCp1256Mojibake } from "./mojibake";
 
 export type PlatformId = "Android" | "Windows" | "macOS" | "Linux" | "Web" | "Other";
 
@@ -146,10 +147,12 @@ export function normalizeAsset(asset: GhAsset, overrides?: AssetOverride[]): Nor
 
 export function normalizeRelease(release: GhRelease, app?: Pick<AppEntry, "assetOverrides">): NormalizedRelease {
   const assets = (release.assets ?? []).map((asset) => normalizeAsset(asset, app?.assetOverrides));
+  const rawName = release.name || release.tag_name;
+  const rawNotes = release.body && release.body.trim().length > 0 ? release.body : null;
   return {
     tagName: release.tag_name,
-    name: release.name || release.tag_name,
-    notes: release.body && release.body.trim().length > 0 ? release.body : null,
+    name: repairCp1256Mojibake(rawName),
+    notes: rawNotes ? repairCp1256Mojibake(rawNotes) : null,
     url: release.html_url,
     publishedAt: release.published_at,
     prerelease: Boolean(release.prerelease),

@@ -62,7 +62,7 @@ export interface FetchResult<T> {
   source: FetchSource;
 }
 
-const TIMEOUT_MS = 12_000;
+const TIMEOUT_MS = 8_000;
 const RETRY_DELAY_MS = 500;
 
 const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
