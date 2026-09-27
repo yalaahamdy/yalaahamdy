@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Yalaah Apps configuration",
+  "type": "object",
+  "required": ["site", "apps"],
+  "properties": {
+    "site": {
+      "type": "object",
+      "required": ["name", "owner", "githubProfile", "url"],
+      "properties": {
+        "name": { "type": "string", "description": "Full site / brand name used in header, footer and metadata." },
+        "shortName": { "type": "string", "description": "Short name used for the PWA manifest." },
+        "tagline": { "type": "string" },
+        "description": { "type": "string", "description": "Default meta description for the site." },
+        "owner": { "type": "string", "description": "GitHub username that owns the repositories." },
+        "githubProfile": { "type": "string", "format": "uri" },
+        "url": { "type": "string", "format": "uri", "description": "Canonical site origin, e.g. https://yalaahamdy.github.io" },
+        "version": { "type": "string" },
+        "keywords": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "apps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slug", "name", "repository", "description", "category"],
+        "properties": {
+          "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "description": "URL segment: /apps/<slug>/" },
+          "name": { "type": "string" },
+          "repository": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$", "description": "owner/repo on GitHub" },
+          "description": { "type": "string", "maxLength": 280 },
+          "descriptionAr": { "type": "string", "maxLength": 280, "description": "Arabic description shown when the site language is العربية. Falls back to the English description." },
+          "platforms": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["Android", "Windows", "macOS", "Linux", "Web", "iOS"] }
+          },
+          "category": { "type": "string" },
+          "featured": { "type": "boolean", "default": false },
+          "icon": { "type": "string", "description": "Icon source. '/path' = site asset in /public (recommended — run scripts/sync_app_icons.py). 'http(s)://…' = absolute URL. 'file.png' = file inside the app repository, rendered live from raw.githubusercontent.com. When omitted, the icon is auto-discovered in the repository; final fallback is a generated letter mark." },
+          "screenshots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["src", "alt"],
+              "properties": {
+                "src": { "type": "string" },
+                "alt": { "type": "string" }
+              }
+            }
+          },
+          "assetOverrides": {
+            "type": "array",
+            "description": "Force a platform/label for release assets the auto-detection cannot classify.",
+            "items": {
+              "type": "object",
+              "required": ["match", "platform"],
+              "properties": {
+                "match": { "type": "string", "description": "Regex matched against the asset file name, e.g. '\\\\.zip$'" },
+                "platform": { "type": "string", "enum": ["Android", "Windows", "macOS", "Linux", "Web", "Other"] },
+                "label": { "type": "string", "description": "Optional friendly label, e.g. 'Portable ZIP'" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

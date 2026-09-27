@@ -1,0 +1,30 @@
+# dependencies / build
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# sandbox & workspace artifacts (not part of the site)
+.zscripts/
+dev.log
+server.log
+research/
+download/
+worklog.md
+Caddyfile
+bun.lock
+skills/
+mini-services/
+
+# leftover scaffold pieces not used by the static site
+db/
+prisma/
+examples/
+tests/
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+.env*

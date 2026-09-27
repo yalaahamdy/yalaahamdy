@@ -1,0 +1,119 @@
+{
+  "$schema": "./apps.schema.json",
+  "site": {
+    "name": "Yalaah Apps",
+    "shortName": "YalaahApps",
+    "tagline": "Every app I build — in one official hub",
+    "description": "The official hub for all apps and projects by Yalaah Hamdy. Browse live release information, see what's new, and download the latest version directly from GitHub Releases.",
+    "owner": "yalaahamdy",
+    "githubProfile": "https://github.com/yalaahamdy",
+    "url": "https://yalaahamdy.github.io",
+    "version": "1.1.0",
+    "keywords": [
+      "Yalaah Apps",
+      "تطبيقات يالاء",
+      "app downloads",
+      "GitHub Releases",
+      "ClipVault",
+      "SIRAJ",
+      "SafeGuard",
+      "Android apps",
+      "Windows apps"
+    ]
+  },
+  "apps": [
+    {
+      "slug": "clipvault",
+      "name": "ClipVault",
+      "repository": "yalaahamdy/ClipVault",
+      "description": "A lightweight, modern desktop clipboard manager for Windows 10 and 11 — built with Tauri v2 and Rust, with a modern React + TypeScript interface.",
+      "descriptionAr": "مدير حافظة حديث وخفيف جدًا لسطح مكتب ويندوز 10 و11 — مبني بتقنيتي Tauri v2 وRust مع واجهة تفاعلية حديثة بـ React وTypeScript.",
+      "platforms": ["Windows", "Android"],
+      "category": "Utilities",
+      "featured": true,
+      "icon": "/app-icons/clipvault.webp"
+    },
+    {
+      "slug": "siraj",
+      "name": "SIRAJ",
+      "repository": "yalaahamdy/SIRAJ",
+      "description": "A comprehensive, open-source Islamic platform built with the latest technologies.",
+      "descriptionAr": "المنصة الإسلامية الشاملة والمفتوحة المصدر، المبنية بأحدث التقنيات.",
+      "platforms": ["Android"],
+      "category": "Islamic",
+      "featured": true,
+      "icon": "/app-icons/siraj.webp"
+    },
+    {
+      "slug": "safeguard",
+      "name": "SafeGuard",
+      "repository": "yalaahamdy/safeguard",
+      "description": "A high-security, policy-controlled Android web browser with PIN-protected administration, an encrypted vault, and a real-time URL guard.",
+      "descriptionAr": "متصفح ويب لأندرويد عالي الأمان ومتحكَّم به عبر سياسات، مع إدارة محمية برمز PIN وخزنة مشفّرة وحارس روابط يعمل آنيًا.",
+      "platforms": ["Android"],
+      "category": "Security",
+      "featured": true,
+      "icon": "/app-icons/safeguard.svg"
+    },
+    {
+      "slug": "securebrowser",
+      "name": "SecureBrowser",
+      "repository": "yalaahamdy/SecureBrowser",
+      "description": "A secure browser app for Android, distributed through GitHub Releases.",
+      "descriptionAr": "متصفح آمن لأجهزة أندرويد، يُوزَّع عبر إصدارات GitHub الرسمية.",
+      "platforms": ["Android"],
+      "category": "Security",
+      "icon": "/app-icons/securebrowser.svg"
+    },
+    {
+      "slug": "app-usage-tracker",
+      "name": "App Usage Tracker",
+      "repository": "yalaahamdy/App-Usage-Tracker-Controller",
+      "description": "App Usage Tracker & Controller (Muraqib) — track and manage app usage on Android.",
+      "descriptionAr": "مراقِب الاستخدام والمتحكَّم به (مراقب) — تتبّع استخدام التطبيقات على أندرويد وأدارته بحكمة.",
+      "platforms": ["Android"],
+      "category": "Productivity",
+      "icon": "/app-icons/app-usage-tracker.webp"
+    },
+    {
+      "slug": "screenmonitor",
+      "name": "ScreenMonitor",
+      "repository": "yalaahamdy/ScreenMonitor",
+      "description": "A screen monitoring tool for Android, distributed through GitHub Releases.",
+      "descriptionAr": "أداة لمراقبة الشاشة على أندرويد، تُوزَّع عبر إصدارات GitHub الرسمية.",
+      "platforms": ["Android"],
+      "category": "Utilities",
+      "icon": "/app-icons/screenmonitor.webp"
+    },
+    {
+      "slug": "eea",
+      "name": "EEA",
+      "repository": "yalaahamdy/EEA",
+      "description": "A fully client-side single-page app for teaching English to Egyptian Arabic speakers, aligned with the CEFR A1 Elementary standard.",
+      "descriptionAr": "تطبيق صفحة واحدة يعمل كاملًا من جانب العميل دون أي خادم، لتعليم الإنجليزية للناطقين بالعربية المصرية وفق معيار CEFR A1.",
+      "platforms": ["Web"],
+      "category": "Education",
+      "icon": "/app-icons/eea.webp"
+    },
+    {
+      "slug": "laselki",
+      "name": "Laselki",
+      "repository": "yalaahamdy/Laselki",
+      "description": "A project in active development — source code is available on GitHub.",
+      "descriptionAr": "مشروع قيد التطوير النشط — الشيفرة المصدرية متاحة على GitHub.",
+      "platforms": [],
+      "category": "Other",
+      "icon": "/app-icons/laselki.svg"
+    },
+    {
+      "slug": "siraj-website",
+      "name": "SIRAJ Website",
+      "repository": "yalaahamdy/SIRAJ-website",
+      "description": "The official website of SIRAJ, the comprehensive open-source Islamic platform.",
+      "descriptionAr": "الموقع الرسمي لمنصة سراج — المنصة الإسلامية الشاملة والمفتوحة المصدر.",
+      "platforms": ["Web"],
+      "category": "Islamic",
+      "icon": "/app-icons/siraj-website.svg"
+    }
+  ]
+}
