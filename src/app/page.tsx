@@ -12,7 +12,7 @@ const jsonLd = {
   name: site.name,
   alternateName: "تطبيقات يالاء",
   url: SITE_URL,
-  description: "The official hub for all apps and projects by Yalaah Hamdy — live GitHub Releases, downloads and updates.",
+  description: "The official hub for all apps and projects by yalaa — live GitHub Releases, downloads and updates.",
   author: { "@type": "Person", name: site.owner, url: site.githubProfile },
 };
 

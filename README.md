@@ -1,6 +1,6 @@
 <div align="center">
 
-# 👋 Hi there, I'm Yalaah Hamdy (يالاء حمدي)
+# 👋 Hi there, I'm yalaa
 ### Software Engineer · Desktop, Mobile & Web Applications Builder
 
 <p align="center">
@@ -63,7 +63,7 @@ Explore my flagship apps available directly through my [Official Apps Hub](https
 ## 📊 GitHub Statistics
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=yalaahamdy&show_icons=true&theme=radical&hide_border=true&count_private=true" alt="Yalaah's GitHub Stats" />
+  <img src="https://github-readme-stats.vercel.app/api?username=yalaahamdy&show_icons=true&theme=radical&hide_border=true&count_private=true" alt="yalaa's GitHub Stats" />
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=yalaahamdy&layout=compact&theme=radical&hide_border=true" alt="Top Languages" />
 </div>
 

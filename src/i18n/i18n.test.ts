@@ -32,7 +32,7 @@ describe("dictionaries", () => {
     walk(ar);
     const offenders = values.filter((value) => {
       // Allow brand names, GitHub, version-ish tokens and format placeholders.
-      const cleaned = value.replace(/\{(\w+)\}/g, "").replace(/GitHub|macOS|iOS|AAB|MSIX|APK|DEB|RPM|AppImage|Snap|Flatpak|CEFR|Yalaah|PIN|Web|zip|tar\.gz|v?\d+(\.\d+)*/g, "");
+      const cleaned = value.replace(/\{(\w+)\}/g, "").replace(/GitHub|macOS|iOS|AAB|MSIX|APK|DEB|RPM|AppImage|Snap|Flatpak|CEFR|Yalaah|yalaa|Yalaa|PIN|Web|zip|tar\.gz|v?\d+(\.\d+)*/g, "");
       return asciiOnly.test(cleaned);
     });
     expect(offenders).toEqual([]);

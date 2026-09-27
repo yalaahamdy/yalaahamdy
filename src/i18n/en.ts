@@ -3,10 +3,10 @@
 export const en = {
   brand: {
     name: "Yalaah Apps",
-    owner: "Yalaah Hamdy",
+    owner: "yalaa",
     tagline: "Every app I build — in one official hub",
     description:
-      "The official hub for all apps and projects by Yalaah Hamdy. Browse live release information, see what's new, and download the latest version directly from GitHub Releases.",
+      "The official hub for all apps and projects by yalaa. Browse live release information, see what's new, and download the latest version directly from GitHub Releases.",
   },
   nav: {
     home: "Home",
@@ -18,7 +18,7 @@ export const en = {
     primaryAria: "Primary",
     mobileAria: "Mobile",
     homeAria: "Yalaah Apps — home",
-    githubAria: "Yalaah Hamdy on GitHub",
+    githubAria: "yalaa on GitHub",
     skipToContent: "Skip to content",
   },
   theme: {

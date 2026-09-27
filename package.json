@@ -2,7 +2,7 @@
   "name": "yalaah-apps",
   "version": "1.0.0",
   "private": true,
-  "description": "Official hub for all apps and projects by Yalaah Hamdy — live GitHub Releases, downloads and updates.",
+  "description": "Official hub for all apps and projects by yalaa — live GitHub Releases, downloads and updates.",
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
     "build": "next build",

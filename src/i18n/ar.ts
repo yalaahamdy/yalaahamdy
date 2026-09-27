@@ -8,10 +8,10 @@ import type { Dictionary } from "./en";
 export const ar: Dictionary = {
   brand: {
     name: "تطبيقات يالاء",
-    owner: "يالاء حمدي",
+    owner: "yalaa",
     tagline: "كل تطبيق أبنيه — في منصة رسمية واحدة",
     description:
-      "المركز الرسمي لكل تطبيقات ومشاريع يالاء حمدي. تصفّح معلومات الإصدارات المباشرة، واطّلع على الجديد، ونزّل أحدث نسخة مباشرة من إصدارات GitHub الرسمية.",
+      "المركز الرسمي لكل تطبيقات ومشاريع yalaa. تصفّح معلومات الإصدارات المباشرة، واطّلع على الجديد، ونزّل أحدث نسخة مباشرة من إصدارات GitHub الرسمية.",
   },
   nav: {
     home: "الرئيسية",
@@ -23,7 +23,7 @@ export const ar: Dictionary = {
     primaryAria: "التنقل الرئيسي",
     mobileAria: "قائمة الجوال",
     homeAria: "تطبيقات يالاء — الرئيسية",
-    githubAria: "يالاء حمدي على GitHub",
+    githubAria: "yalaa على GitHub",
     skipToContent: "الانتقال إلى المحتوى",
   },
   theme: {
