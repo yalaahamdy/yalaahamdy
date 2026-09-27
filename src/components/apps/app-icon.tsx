@@ -1,29 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { BrandMark } from "@/components/site/brand-mark";
 import type { AppEntry } from "@/lib/config";
 import { BASE_PATH } from "@/lib/config";
 import { discoverRepoIcon, resolveConfiguredIcon } from "@/lib/services/icons";
 import { cn } from "@/lib/utils";
-
-const GRADIENTS: readonly (readonly [string, string])[] = [
-  ["#8b5cf6", "#6d28d9"],
-  ["#d946ef", "#a21caf"],
-  ["#14b8a6", "#0f766e"],
-  ["#f59e0b", "#c2660b"],
-  ["#f43f5e", "#be123c"],
-  ["#22c55e", "#15803d"],
-  ["#ec4899", "#be185d"],
-  ["#a855f7", "#7e22ce"],
-];
-
-function hashName(name: string): number {
-  let hash = 0;
-  for (let i = 0; i < name.length; i += 1) {
-    hash = (hash * 31 + name.charCodeAt(i)) | 0;
-  }
-  return Math.abs(hash);
-}
 
 const SIZES = {
   md: "h-12 w-12 rounded-xl text-lg",
@@ -68,8 +50,6 @@ export function AppIcon({ app, size = "md", className }: { app: AppEntry; size?:
   }, [configured, discovered]);
 
   const src = candidates.find((url) => !failedUrls.has(url)) ?? null;
-  const mark = app.name.charAt(0).toUpperCase();
-  const [from, to] = GRADIENTS[hashName(app.name) % GRADIENTS.length];
 
   if (src) {
     return (
@@ -92,13 +72,5 @@ export function AppIcon({ app, size = "md", className }: { app: AppEntry; size?:
     );
   }
 
-  return (
-    <span
-      aria-hidden="true"
-      className={cn("inline-flex shrink-0 select-none items-center justify-center font-bold text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10", sizeClass, className)}
-      style={{ backgroundImage: `linear-gradient(135deg, ${from}, ${to})` }}
-    >
-      {mark}
-    </span>
-  );
+  return <BrandMark className={cn(sizeClass, "shrink-0 shadow-sm", className)} />;
 }
