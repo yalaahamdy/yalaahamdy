@@ -81,7 +81,7 @@ Explore my flagship apps available directly through my [Official Apps Hub](https
 
 <br>
 
-This repository also powers the **Yalaah Apps Distribution Hub** built with Next.js 16, TypeScript, and Tailwind CSS.
+This repository also powers the **yalaa Apps Distribution Hub** built with Next.js 16, TypeScript, and Tailwind CSS.
 
 ### Running Locally
 

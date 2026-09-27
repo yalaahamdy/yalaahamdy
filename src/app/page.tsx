@@ -10,7 +10,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: site.name,
-  alternateName: "تطبيقات يالاء",
+  alternateName: "تطبيقات yalaa",
   url: SITE_URL,
   description: "The official hub for all apps and projects by yalaa — live GitHub Releases, downloads and updates.",
   author: { "@type": "Person", name: site.owner, url: site.githubProfile },

@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 /** Gradient "Y" monogram — the site's logo mark. */
 export function BrandMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 64 64" role="img" aria-label="Yalaah Apps logo" className={cn("rounded-[10px] shadow-sm", className)}>
+    <svg viewBox="0 0 64 64" role="img" aria-label="yalaa Apps logo" className={cn("rounded-[10px] shadow-sm", className)}>
       <defs>
         <linearGradient id="ya-brand-g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
           <stop stopColor="#8b5cf6" />

@@ -7,7 +7,7 @@ import type { Dictionary } from "./en";
  */
 export const ar: Dictionary = {
   brand: {
-    name: "تطبيقات يالاء",
+    name: "تطبيقات yalaa",
     owner: "yalaa",
     tagline: "كل تطبيق أبنيه — في منصة رسمية واحدة",
     description:
@@ -22,7 +22,7 @@ export const ar: Dictionary = {
     closeMenu: "إغلاق القائمة",
     primaryAria: "التنقل الرئيسي",
     mobileAria: "قائمة الجوال",
-    homeAria: "تطبيقات يالاء — الرئيسية",
+    homeAria: "تطبيقات yalaa — الرئيسية",
     githubAria: "yalaa على GitHub",
     skipToContent: "الانتقال إلى المحتوى",
   },

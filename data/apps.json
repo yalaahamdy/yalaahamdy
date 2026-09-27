@@ -1,8 +1,8 @@
 {
   "$schema": "./apps.schema.json",
   "site": {
-    "name": "Yalaah Apps",
-    "shortName": "YalaahApps",
+    "name": "yalaa Apps",
+    "shortName": "yalaaApps",
     "tagline": "Every app I build — in one official hub",
     "description": "The official hub for all apps and projects by yalaa. Browse live release information, see what's new, and download the latest version directly from GitHub Releases.",
     "owner": "yalaahamdy",
@@ -10,8 +10,8 @@
     "url": "https://yalaahamdy.github.io",
     "version": "1.1.0",
     "keywords": [
-      "Yalaah Apps",
-      "تطبيقات يالاء",
+      "yalaa Apps",
+      "تطبيقات yalaa",
       "app downloads",
       "GitHub Releases",
       "ClipVault",

@@ -2,7 +2,7 @@
 
 export const en = {
   brand: {
-    name: "Yalaah Apps",
+    name: "yalaa Apps",
     owner: "yalaa",
     tagline: "Every app I build — in one official hub",
     description:
@@ -17,7 +17,7 @@ export const en = {
     closeMenu: "Close menu",
     primaryAria: "Primary",
     mobileAria: "Mobile",
-    homeAria: "Yalaah Apps — home",
+    homeAria: "yalaa Apps — home",
     githubAria: "yalaa on GitHub",
     skipToContent: "Skip to content",
   },
