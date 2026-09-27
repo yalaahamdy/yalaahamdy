@@ -3,7 +3,7 @@ import { ThemeProvider } from "next-themes";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { SwRegister } from "@/components/site/sw-register";
-import { SITE_URL, site } from "@/lib/config";
+import { SITE_URL, site, withBasePath } from "@/lib/config";
 import { localeNoFlashScript } from "@/i18n/config";
 import { I18nProvider } from "@/i18n/provider";
 import { ar } from "@/i18n/ar";
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
   applicationName: site.name,
   authors: [{ name: site.owner, url: site.githubProfile }],
   creator: site.owner,
-  manifest: "/manifest.webmanifest",
+  manifest: withBasePath("/manifest.webmanifest"),
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: withBasePath("/favicon.svg"), type: "image/svg+xml" },
+      { url: withBasePath("/icons/icon-192.png"), sizes: "192x192", type: "image/png" },
     ],
-    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
+    apple: [{ url: withBasePath("/icons/apple-touch-icon.png"), sizes: "180x180" }],
   },
   openGraph: {
     type: "website",
@@ -48,14 +48,14 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     title: `${site.name} — ${site.tagline}`,
     description: brand.description,
-    url: "/",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: site.name }],
+    url: withBasePath("/"),
+    images: [{ url: withBasePath("/og-image.png"), width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — ${site.tagline}`,
     description: brand.description,
-    images: ["/og-image.png"],
+    images: [withBasePath("/og-image.png")],
   },
   robots: { index: true, follow: true },
 };
