@@ -1,5 +1,6 @@
 import { cacheGet, cacheSet } from "./cache";
 import type { AppEntry } from "../config";
+import { convertVectorDrawableToSvg, svgToDataUri } from "./vector-drawable";
 
 /**
  * App icon resolution — three professional sources, in order:
@@ -10,9 +11,10 @@ import type { AppEntry } from "../config";
  *       - "http…"  → an absolute URL, used as-is
  *       - "a/b.png"→ a file inside the app repository, rendered live from
  *                    raw.githubusercontent.com
- *  2. Automatic discovery inside the repository (git trees API), cached 24h —
- *     so apps that only ship an icon file still show their real icon with
- *     zero configuration.
+ *  2. Automatic discovery inside the repository (git trees API), cached 24h:
+ *       - Ranks real brand assets and high-density icons above generic templates.
+ *       - Detects Android Adaptive Vector Drawables drawn in code (ic_launcher_foreground.xml)
+ *         and converts them dynamically into sharp SVG Data URIs.
  *  3. A deterministic letter-mark rendered locally — never a random web image.
  */
 
@@ -38,7 +40,15 @@ export function resolveConfiguredIcon(app: AppEntry): string | null {
 }
 
 /** File paths that plausibly hold an app icon, scored by desirability. */
-const EXT_SCORE: Record<string, number> = { ".svg": 5, ".png": 4, ".webp": 3, ".jpg": 2, ".jpeg": 2, ".ico": 1 };
+const EXT_SCORE: Record<string, number> = {
+  ".svg": 5,
+  ".xml": 4.6,
+  ".png": 4,
+  ".webp": 3.8,
+  ".jpg": 2,
+  ".jpeg": 2,
+  ".ico": 1,
+};
 const DENSITY_SCORE: Record<string, number> = { xxxhdpi: 5, xxhdpi: 4, xhdpi: 3, hdpi: 2, mdpi: 1 };
 
 export function scoreIconPath(path: string): number {
@@ -46,21 +56,35 @@ export function scoreIconPath(path: string): number {
   const file = lower.split("/").pop() ?? "";
   const dot = file.lastIndexOf(".");
   const ext = dot >= 0 ? file.slice(dot) : "";
+
+  // Strongly penalize boilerplate / generic framework template files
+  if (/(^|\/)(vercel|next|create-react-app|default-avatar|placeholder)\.[a-z]+$/i.test(lower)) {
+    return -50;
+  }
+
   let score = (EXT_SCORE[ext] ?? 0) * 10;
-  if (/(^|\/)(icon|app[-_]?icon|ic_launcher)/.test(lower)) score += 4;
+
+  // High priority for dedicated brand directories and explicit app icon names
+  if (/(^|\/)(brand|branding)\//.test(lower)) score += 15;
+  if (/(^|\/)(icon|app[-_]?icon|ic_launcher)/.test(lower)) score += 6;
   if (/logo/.test(lower)) score += 2;
+
+  // Android Adaptive icon foreground drawn in code
+  if (lower.includes("ic_launcher_foreground.xml")) score += 10;
+
   for (const [density, value] of Object.entries(DENSITY_SCORE)) {
     if (lower.includes(density)) {
       score += value;
       break;
     }
   }
-  score += Math.max(0, 3 - path.split("/").length); // prefer shallower paths
+
+  score += Math.max(0, 3 - path.split("/").length); // prefer shallower paths unless boosted
   return score;
 }
 
-const ICON_FILE_PATTERN =
-  /(^|\/)(icon|logo|app[-_]?icon|appicon|ic_launcher[^/]*|apple-touch-icon|android-chrome-\d+|favicon(-\d+x\d+)?)\.(png|svg|webp|jpe?g|ico)$/i;
+export const ICON_FILE_PATTERN =
+  /(^|\/)((icon|logo|app[-_]?icon|appicon|ic_launcher[^/]*|apple-touch-icon|android-chrome-\d+|favicon(-\d+x\d+)?)\.(png|svg|webp|jpe?g|ico)|(ic_launcher_foreground|ic_launcher)\.xml)$/i;
 
 export function bestIconPath(paths: readonly string[]): string | null {
   const candidates = paths.filter((path) => ICON_FILE_PATTERN.test(path));
@@ -111,7 +135,45 @@ export async function discoverRepoIcon(repo: string): Promise<string | null> {
           .filter((entry) => entry.type === "blob")
           .map((entry) => entry.path ?? "");
         const best = bestIconPath(paths);
-        const url = best ? `https://raw.githubusercontent.com/${repo}/HEAD/${best}` : null;
+        if (!best) {
+          cacheSet<CachedIcon>(key, { url: null }, null);
+          return null;
+        }
+
+        let url: string | null = null;
+        if (best.toLowerCase().endsWith(".xml")) {
+          // Android Vector XML icon drawn in code — fetch and convert dynamically
+          try {
+            const rawUrl = `https://raw.githubusercontent.com/${repo}/HEAD/${best}`;
+            const res = await fetch(rawUrl, { signal: controller.signal });
+            if (res.ok) {
+              const xmlContent = await res.text();
+              let backgroundXml: string | undefined;
+
+              // Check if an adaptive background vector exists in the tree
+              const bgPath = paths.find((p) => /ic_launcher_background\.xml$/i.test(p));
+              if (bgPath) {
+                const bgRes = await fetch(`https://raw.githubusercontent.com/${repo}/HEAD/${bgPath}`, {
+                  signal: controller.signal,
+                });
+                if (bgRes.ok) {
+                  backgroundXml = await bgRes.text();
+                }
+              }
+
+              const svg = convertVectorDrawableToSvg(xmlContent, {
+                backgroundXml,
+                backgroundColor: backgroundXml ? undefined : "#111827",
+              });
+              url = svgToDataUri(svg);
+            }
+          } catch {
+            url = null;
+          }
+        } else {
+          url = `https://raw.githubusercontent.com/${repo}/HEAD/${best}`;
+        }
+
         cacheSet<CachedIcon>(key, { url }, null);
         return url;
       } finally {

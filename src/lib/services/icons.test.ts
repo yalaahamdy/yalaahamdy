@@ -60,4 +60,22 @@ describe("bestIconPath", () => {
     expect(bestIconPath(["app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp"])).toBeTruthy();
     expect(bestIconPath(["src-tauri/icons/icon.png"])).toBeTruthy();
   });
+
+  it("prefers explicit brand assets over generic template logos", () => {
+    const chosen = bestIconPath(["public/logo.svg", "public/brand/app_icon.png"]);
+    expect(chosen).toBe("public/brand/app_icon.png");
+  });
+
+  it("penalizes boilerplate files like next.svg and vercel.svg", () => {
+    expect(scoreIconPath("public/vercel.svg")).toBeLessThan(0);
+    expect(scoreIconPath("public/next.svg")).toBeLessThan(0);
+  });
+
+  it("detects code-drawn Android launcher vector xml as a prime icon candidate", () => {
+    const chosen = bestIconPath([
+      "app/src/main/res/drawable/ic_launcher_foreground.xml",
+      "public/dummy-icon.png",
+    ]);
+    expect(chosen).toBe("app/src/main/res/drawable/ic_launcher_foreground.xml");
+  });
 });

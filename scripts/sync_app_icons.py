@@ -18,10 +18,13 @@ import urllib.request
 import xml.etree.ElementTree as ET
 import zipfile
 
+from pathlib import Path
 from PIL import Image
 
 UA = {"User-Agent": "Mozilla/5.0 (research)"}
-OUT = "/home/z/my-project/public/app-icons"
+BASE_DIR = Path(__file__).resolve().parent.parent
+OUT = str(BASE_DIR / "public" / "app-icons")
+RESEARCH_DIR = BASE_DIR / "research"
 NS = "{http://schemas.android.com/apk/res/android}"
 
 # slug -> (repo, icon path in repo | "@adaptive")
@@ -30,11 +33,11 @@ SOURCES = {
     "siraj": ("yalaahamdy/SIRAJ", "icon.png"),
     "safeguard": ("yalaahamdy/safeguard", "@adaptive"),
     "securebrowser": ("yalaahamdy/SecureBrowser", "@adaptive"),
-    "app-usage-tracker": ("yalaahamdy/App-Usage-Tracker-Controller", "app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp"),
+    "app-usage-tracker": ("yalaahamdy/App-Usage-Tracker-Controller", "@adaptive"),
     "screenmonitor": ("yalaahamdy/ScreenMonitor", "app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"),
     "eea": ("yalaahamdy/EEA", "icon/logo.png"),
-    "laselki": ("yalaahamdy/Laselki", "public/logo.svg"),
-    "siraj-website": ("yalaahamdy/SIRAJ-website", "public/logo.svg"),
+    "laselki": ("yalaahamdy/Laselki", "@adaptive"),
+    "siraj-website": ("yalaahamdy/SIRAJ-website", "public/brand/app_icon.png"),
 }
 
 
@@ -196,7 +199,8 @@ def main() -> None:
             report[slug] = {"error": str(exc), "repo": repo, "origin": source}
             print(f"{slug:18s} -> ERROR: {exc}")
 
-    with open("/home/z/my-project/research/icon-map.json", "w", encoding="utf-8") as f:
+    RESEARCH_DIR.mkdir(parents=True, exist_ok=True)
+    with open(RESEARCH_DIR / "icon-map.json", "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
     print("\nProvenance written to research/icon-map.json")
 

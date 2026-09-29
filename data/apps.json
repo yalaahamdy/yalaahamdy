@@ -73,7 +73,7 @@
       "descriptionAr": "مراقِب الاستخدام والمتحكَّم به (مراقب) — تتبّع استخدام التطبيقات على أندرويد وأدارته بحكمة.",
       "platforms": ["Android"],
       "category": "Productivity",
-      "icon": "/favicon.svg"
+      "icon": "/app-icons/app-usage-tracker.svg"
     },
     {
       "slug": "screenmonitor",
@@ -103,7 +103,7 @@
       "descriptionAr": "مشروع قيد التطوير النشط — الشيفرة المصدرية متاحة على GitHub.",
       "platforms": [],
       "category": "Other",
-      "icon": "/favicon.svg"
+      "icon": "/app-icons/laselki.svg"
     },
     {
       "slug": "siraj-website",
@@ -113,7 +113,7 @@
       "descriptionAr": "الموقع الرسمي لمنصة سراج — المنصة الإسلامية الشاملة والمفتوحة المصدر.",
       "platforms": ["Web"],
       "category": "Islamic",
-      "icon": "/favicon.svg"
+      "icon": "/app-icons/siraj-website.webp"
     }
   ]
 }
