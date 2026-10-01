@@ -7,6 +7,7 @@ import { AppIcon } from "@/components/apps/app-icon";
 import { DownloadsPanel } from "@/components/apps/downloads-panel";
 import { platformIcon } from "@/components/apps/platform-icon";
 import { ReleaseNotes } from "@/components/apps/release-notes";
+import { ScreenshotsGallery } from "@/components/apps/screenshots-gallery";
 import { StatePanel } from "@/components/states/panels";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -140,6 +141,11 @@ export function AppDetail({ app }: { app: AppEntry }) {
             </a>
           </Button>
         </StatePanel>
+        {app.screenshots && app.screenshots.length > 0 && (
+          <div className="pt-2">
+            <ScreenshotsGallery screenshots={app.screenshots} heading={t.detail.screenshots} />
+          </div>
+        )}
       </div>
     );
   }
@@ -259,16 +265,7 @@ export function AppDetail({ app }: { app: AppEntry }) {
             )}
 
             {app.screenshots && app.screenshots.length > 0 && (
-              <section aria-labelledby="screenshots-heading">
-                <h2 id="screenshots-heading" className="section-title text-xl">
-                  {t.detail.screenshots}
-                </h2>
-                <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                  {app.screenshots.map((shot) => (
-                    <img key={shot.src} src={shot.src} alt={shot.alt} loading="lazy" className="w-full rounded-xl border object-cover" />
-                  ))}
-                </div>
-              </section>
+              <ScreenshotsGallery screenshots={app.screenshots} heading={t.detail.screenshots} />
             )}
           </div>
 

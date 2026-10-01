@@ -29,6 +29,7 @@ NS = "{http://schemas.android.com/apk/res/android}"
 
 # slug -> (repo, icon path in repo | "@adaptive")
 SOURCES = {
+    "localdock": ("Youssef-Alaa-Hamdy/LocalDock", "src-tauri/icons/Square310x310Logo.png"),
     "clipvault": ("yalaahamdy/ClipVault", "icon.png"),
     "siraj": ("yalaahamdy/SIRAJ", "icon.png"),
     "safeguard": ("yalaahamdy/safeguard", "@adaptive"),

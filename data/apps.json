@@ -15,6 +15,7 @@
       "app downloads",
       "GitHub Releases",
       "ClipVault",
+      "LocalDock",
       "SIRAJ",
       "SafeGuard",
       "Android apps",
@@ -22,6 +23,68 @@
     ]
   },
   "apps": [
+    {
+      "slug": "localdock",
+      "name": "LocalDock",
+      "repository": "Youssef-Alaa-Hamdy/LocalDock",
+      "description": "Turn any computer into a private personal cloud for your local network — built with Tauri v2, Rust, and Next.js 16. Fast, offline-first local file sharing, live transfers, and multi-device access with QR codes.",
+      "descriptionAr": "حوّل أي حاسوب إلى سحابة شخصية خاصة وفائقة السرعة داخل شبكتك المحلية — مبني بتقنيات Tauri v2 وRust وNext.js 16. مشاركة ملفات محلية سريعة بدون إنترنت، نقل مباشر، وربط للأجهزة برمز QR.",
+      "platforms": ["Windows", "Android", "Web"],
+      "category": "Utilities",
+      "featured": true,
+      "icon": "/app-icons/localdock.webp",
+      "screenshots": [
+        {
+          "src": "/screenshots/localdock/arabic-dashboard.webp",
+          "alt": "لوحة التحكم الرئيسية باللغة العربية مع سجل النشاط والإجراءات السريعة"
+        },
+        {
+          "src": "/screenshots/localdock/dashboard-light.webp",
+          "alt": "لوحة التحكم بالوضع الفاتح مع مؤشرات الأداء الحية وحالة النظام"
+        },
+        {
+          "src": "/screenshots/localdock/files-dark.webp",
+          "alt": "متصفح ومستكشف الملفات بالوضع الداكن وشبكة المصغرات الذكية"
+        },
+        {
+          "src": "/screenshots/localdock/transfers-live.webp",
+          "alt": "متابعة عمليات النقل المباشرة والسرعة الفورية بين أجهزة الشبكة"
+        },
+        {
+          "src": "/screenshots/localdock/devices-qr.webp",
+          "alt": "إدارة وربط الأجهزة المتصلة ومسح رمز الاستجابة السريعة QR"
+        },
+        {
+          "src": "/screenshots/localdock/preview-modal.webp",
+          "alt": "نافذة معاينة الوسائط المتقدمة وتدقيق بصمة SHA-256 الرقمية"
+        },
+        {
+          "src": "/screenshots/localdock/files-upload-dock.webp",
+          "alt": "نافذة رفع وسحب وإفلات الملفات متعددة الأجزاء Chunks"
+        },
+        {
+          "src": "/screenshots/localdock/mobile-drawer.webp",
+          "alt": "القائمة الجانبية المتجاوبة المخصصة لشاشات الهواتف والأجهزة اللوحية"
+        }
+      ],
+      "assetOverrides": [
+        {
+          "match": "LocalDock-portable\\.zip$",
+          "platform": "Windows",
+          "label": "Windows Portable ZIP"
+        },
+        {
+          "match": "LocalDock-android-companion\\.apk$",
+          "platform": "Android",
+          "label": "Android Companion APK"
+        },
+        {
+          "match": "LocalDock_.*_x64-setup\\.exe$",
+          "platform": "Windows",
+          "label": "Windows Installer"
+        }
+      ]
+    },
     {
       "slug": "clipvault",
       "name": "ClipVault",
